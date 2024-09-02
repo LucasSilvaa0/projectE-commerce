@@ -1,6 +1,6 @@
 import connection from './db';
 import nodemailer from 'nodemailer';
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
 
 export function searchUser(userScheme:any, res:any, type:number) {
     connection.query('SELECT * FROM users WHERE (email) = (?) LIMIT 1', [userScheme.email], (err, results:any) => {
@@ -90,9 +90,53 @@ async function sendPassword(userScheme:any, password:string) {
 function login(userScheme:any, password:string, res:any) {
     if (userScheme.userpassword === password) {
         console.log("A tentativa de login foi concluída com sucesso.")
-        res.send("Login realizado com sucesso.")
+        res.send(userScheme)
     } else {
         console.log("O email ou a senha estão incorretos.")
         res.send("Login incorreto.")
+    }
+
+}
+
+export function offerProduct(userScheme:any, res:any) {
+    const listMarketProduct = [
+        userScheme.seller_id,
+        userScheme.product_name,
+        userScheme.product_description,
+        userScheme.product_price,
+        userScheme.photo_link
+    ]
+
+    connection.query("INSERT INTO marketproducts (seller_id, product_name, product_description, product_price, photo_link) VALUES (?, ?, ?, ?, ?)", listMarketProduct, (err, results) => {
+        if (err !== null) {
+            console.log("Ocorreu algum erro")
+            res.send("Erro ao tentar cadastrar o produto")
+        } else {
+            res.send("Produto cadastrado com sucesso.")
+        }
+    });
+}
+
+export function showProducts(res:any, type:number, id:any=0) {
+    switch (type) {
+        case 0:
+            connection.query("SELECT * FROM marketproducts", [], (err, results) => {
+                if (err !== null) {
+                    console.log("Ocorreu um erro.")
+                    res.send("Erro ao tentar ver os produtos.")
+                } else {
+                    res.send(results)
+                }
+            });
+            break
+        case 1:
+            connection.query("SELECT * FROM marketproducts WHERE id = ?", [id], (err, results) => {
+                if (err !== null) {
+                    console.log("Ocorreu um erro.")
+                    res.send("Erro ao tentar ver os próprios produtos.")
+                } else {
+                    res.send(results)
+                }
+            });
     }
 }

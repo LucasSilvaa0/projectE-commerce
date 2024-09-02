@@ -1,6 +1,6 @@
 import express from 'express';
-import { NewUser } from "./models";
-import { searchUser } from './functions';
+import { UserModel, MarketProductModel } from "./models";
+import { showProducts, offerProduct, searchUser } from './functions';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -25,12 +25,12 @@ app.post('/new_user', (req, res) => {
 
     const newUserScheme = req.body
 
-    const result1 = NewUser.safeParse(newUserScheme);
-    if (result1.success) {
-        console.log("Validação bem-sucedida:", result1.data);
+    const result = UserModel.safeParse(newUserScheme);
+    if (result.success) {
+        console.log("Validação bem-sucedida:", result.data);
         searchUser(newUserScheme, res, 0)
     } else {
-        console.log("Erro de validação:", result1.error.errors);
+        console.log("Erro de validação:", result.error.errors);
     }
     
 });
@@ -50,3 +50,32 @@ app.post('/login', (req, res) => {
 
     searchUser(user, res, 2)
 });
+
+app.post('/market/new_product', (req, res) => {
+    console.log("Tem alguém querendo oferecer um novo produto.")
+
+    const newProductScheme = req.body
+
+    const result = MarketProductModel.safeParse(newProductScheme)
+
+    console.log(result)
+
+    if (result.success) {
+        offerProduct(newProductScheme, res)
+    }
+})
+
+app.get('/market/products', (req, res) => {
+    console.log("Alguém está querendo dar uma olhada na loja.")
+
+    showProducts(res, 0)
+})
+
+//PRECISA ADICIONAR O ID NO LINK DO SITE
+app.get(`/market/myproducts/:userId`, (req, res) => {
+    console.log("Alguém está querendo ver seus próprios produtos.")
+
+    const userId = req.params.userId
+
+    showProducts(res, 0, userId)
+})
