@@ -71,7 +71,6 @@ app.get('/market/products', (req, res) => {
     showProducts(res, 0)
 })
 
-//PRECISA ADICIONAR O ID NO LINK DO SITE
 app.get(`/market/myproducts/:userId`, (req, res) => {
     console.log("Alguém está querendo ver seus próprios produtos.")
 
