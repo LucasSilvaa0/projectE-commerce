@@ -1,6 +1,6 @@
 import express from 'express';
 import { UserModel, MarketProductModel } from "./models";
-import { showProducts, offerProduct, searchUser } from './functions';
+import { showProducts, offerProduct, delProduct, searchUser } from './functions';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -65,6 +65,14 @@ app.post('/market/new_product', (req, res) => {
     }
 })
 
+app.delete(`/market/del_product/:id`, (req, res) => {
+    console.log("Alguém está querendo deletar um produto do mercado.")
+
+    const productId = req.params.id
+
+    delProduct(productId, res)
+})
+
 app.get('/market/products', (req, res) => {
     console.log("Alguém está querendo dar uma olhada na loja.")
 
@@ -76,5 +84,5 @@ app.get(`/market/myproducts/:userId`, (req, res) => {
 
     const userId = req.params.userId
 
-    showProducts(res, 0, userId)
+    showProducts(res, 1, userId)
 })

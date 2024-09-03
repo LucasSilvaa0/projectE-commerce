@@ -117,6 +117,17 @@ export function offerProduct(userScheme:any, res:any) {
     });
 }
 
+export function delProduct(produtctId:any, res:any) {
+    connection.query("DELETE FROM marketproducts WHERE id=?", [produtctId], (err, results) => {
+        if (err !== null) {
+            console.log("Ocorreu um erro.")
+            res.send("Erro ao tentar deletar o produto.")
+        } else {
+            res.send("Produto deletado com sucesso.")
+        }
+    });
+}
+
 export function showProducts(res:any, type:number, id:any=0) {
     switch (type) {
         case 0:
@@ -130,7 +141,7 @@ export function showProducts(res:any, type:number, id:any=0) {
             });
             break
         case 1:
-            connection.query("SELECT * FROM marketproducts WHERE id = ?", [id], (err, results) => {
+            connection.query("SELECT * FROM marketproducts WHERE seller_id = ?", [id], (err, results) => {
                 if (err !== null) {
                     console.log("Ocorreu um erro.")
                     res.send("Erro ao tentar ver os próprios produtos.")
