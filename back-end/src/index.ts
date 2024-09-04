@@ -1,6 +1,6 @@
 import express from 'express';
-import { UserModel, MarketProductModel } from "./models";
-import { showProducts, offerProduct, delProduct, searchUser } from './functions';
+import { UserModel, MarketProductModel, UpdatePriceModel } from "./models";
+import { showProducts, offerProduct, delProduct, searchUser, updateProductPrice } from './functions';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -62,6 +62,8 @@ app.post('/market/new_product', (req, res) => {
 
     if (result.success) {
         offerProduct(newProductScheme, res)
+    } else {
+        res.send("Ocorreu algum erro na estrutura do JSON.")
     }
 })
 
@@ -71,6 +73,20 @@ app.delete(`/market/del_product/:id`, (req, res) => {
     const productId = req.params.id
 
     delProduct(productId, res)
+})
+
+app.put('/market/update_product', (req, res) => {
+    console.log("Alguém está querendo modificar o preço de um produto.")
+
+    const updatePriceScheme = req.body
+
+    const result = UpdatePriceModel.safeParse(updatePriceScheme)
+
+    if (result.success) {
+        updateProductPrice(updatePriceScheme, res)
+    } else {
+        res.send("Ocorreu algum erro na estrutura do JSON.")
+    }
 })
 
 app.get('/market/products', (req, res) => {

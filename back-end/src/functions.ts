@@ -128,6 +128,26 @@ export function delProduct(produtctId:any, res:any) {
     });
 }
 
+export function updateProductPrice(productPriceScheme:any, res:any) {
+    const listUpdate = [
+        productPriceScheme.new_price,
+        productPriceScheme.product_id, 
+        productPriceScheme.seller_id
+    ]
+
+    console.log(listUpdate)
+
+    connection.query("UPDATE marketproducts SET product_price = ? WHERE (id, seller_id) = (?, ?)", listUpdate, (err, results) => {
+        if (err !== null) {
+            console.log("Ocorreu um erro.")
+            res.send(err)
+        } else {
+            console.log("Preço do produto modificado com sucesso.")
+            res.send(results)
+        }
+    });
+}
+
 export function showProducts(res:any, type:number, id:any=0) {
     switch (type) {
         case 0:
