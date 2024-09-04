@@ -187,3 +187,14 @@ export function newCartProduct(newProductScheme:any, res:any) {
         }
     });
 }
+
+export function delCartProduct(productId:any, res:any) {
+    connection.query("DELETE FROM cartproducts WHERE id = ?", [productId], (err, results) => {
+        if (err !== null) {
+            console.log("Ocorreu algum erro.")
+            res.send(err)
+        } else {
+            res.send("Produto deletado do carrinho com sucesso.")
+        }
+    });
+}

@@ -1,6 +1,6 @@
 import express from 'express';
 import { UserModel, MarketProductModel, UpdatePriceModel, CartProductModel } from "./models";
-import { showProducts, offerProduct, delProduct, searchUser, updateProductPrice, newCartProduct } from './functions';
+import { showProducts, offerProduct, delProduct, searchUser, updateProductPrice, newCartProduct, delCartProduct } from './functions';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -115,4 +115,12 @@ app.post('/market/cart/new_product', (req, res) => {
     } else {
         console.log("Ocorreu algum erro na estrutura do JSON.")
     }
+})
+
+app.delete('/market/cart/del_product/:id', (req, res) => {
+    console.log("Alguém está querendo retirar um produto do carrinho.")
+
+    const productId = req.params.id
+
+    delCartProduct(productId, res)
 })
