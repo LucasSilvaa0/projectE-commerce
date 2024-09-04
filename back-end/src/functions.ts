@@ -171,3 +171,19 @@ export function showProducts(res:any, type:number, id:any=0) {
             });
     }
 }
+
+export function newCartProduct(newProductScheme:any, res:any) {
+    const listNewProduct = [
+        newProductScheme.cart_user_id,
+        newProductScheme.product_id
+    ]
+    
+    connection.query("INSERT INTO cartproducts (cart_user_id, product_id) VALUES (?, ?)", listNewProduct, (err, results) => {
+        if (err !== null) {
+            console.log("Ocorreu algum erro.")
+            res.send(err)
+        } else {
+            res.send("Produto salvo ao carrinho com sucesso.")
+        }
+    });
+}

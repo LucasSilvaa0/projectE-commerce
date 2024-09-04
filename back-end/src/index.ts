@@ -1,6 +1,6 @@
 import express from 'express';
-import { UserModel, MarketProductModel, UpdatePriceModel } from "./models";
-import { showProducts, offerProduct, delProduct, searchUser, updateProductPrice } from './functions';
+import { UserModel, MarketProductModel, UpdatePriceModel, CartProductModel } from "./models";
+import { showProducts, offerProduct, delProduct, searchUser, updateProductPrice, newCartProduct } from './functions';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -101,4 +101,18 @@ app.get(`/market/myproducts/:userId`, (req, res) => {
     const userId = req.params.userId
 
     showProducts(res, 1, userId)
+})
+
+app.post('/market/cart/new_product', (req, res) => {
+    console.log("Alguém está querendo adicionar um produto ao carrinho.")
+
+    const newProductScheme = req.body
+
+    const result = CartProductModel.safeParse(newProductScheme)
+
+    if (result.success) {
+        newCartProduct(newProductScheme, res)
+    } else {
+        console.log("Ocorreu algum erro na estrutura do JSON.")
+    }
 })

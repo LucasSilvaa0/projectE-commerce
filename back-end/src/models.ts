@@ -20,3 +20,8 @@ export const UpdatePriceModel = z.object({
     product_id: z.number().int(),
     new_price: z.number()
 });
+
+export const CartProductModel = z.object({
+    cart_user_id: z.number().int(),
+    product_id: z.number().int()
+});
