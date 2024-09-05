@@ -198,3 +198,39 @@ export function delCartProduct(productId:any, res:any) {
         }
     });
 }
+
+export function resetCart(userId:any, res:any) {
+    connection.query("DELETE FROM cartproducts WHERE cart_user_id = ?", [userId], (err, results) => {
+        if (err !== null) {
+            console.log("Ocorreu algum erro.")
+            res.send(err)
+        } else {
+            res.send("Carrinho esvaziado com sucesso.")
+        }
+    });
+}
+
+export function finishShopping(userId:any, res:any) {
+    connection.query("SELECT * FROM cartproducts WHERE cart_user_id = ?", [userId], (err1, results1:any) => {
+        if (err1 !== null) {
+            console.log("Ocorreu algum erro.")
+            res.send(err1)
+        } else {
+            const listProducts = results1
+            for (let i = 0; i < listProducts.length; i++) {
+                connection.query("DELETE FROM marketproducts WHERE id = ?", [listProducts[i].product_id], (err2, results2) => {
+                    if (err2 !== null) {
+                        res.send(err2)
+                    }
+                })
+            }
+            connection.query("DELETE FROM cartproducts WHERE cart_user_id = ?", [userId], (err3, results3) => {
+                if (err3 !== null) {
+                    res.send(err3)
+                } else {
+                    res.send("Compra finalizada com sucesso.")
+                }
+            });
+        }
+    });
+}

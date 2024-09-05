@@ -1,6 +1,6 @@
 import express from 'express';
 import { UserModel, MarketProductModel, UpdatePriceModel, CartProductModel } from "./models";
-import { showProducts, offerProduct, delProduct, searchUser, updateProductPrice, newCartProduct, delCartProduct } from './functions';
+import { showProducts, offerProduct, delProduct, searchUser, updateProductPrice, newCartProduct, delCartProduct, resetCart, finishShopping } from './functions';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -123,4 +123,20 @@ app.delete('/market/cart/del_product/:id', (req, res) => {
     const productId = req.params.id
 
     delCartProduct(productId, res)
+})
+
+app.delete('/market/cart/reset/:id', (req, res) => {
+    console.log("Alguém está querendo esvaziar o carrinho.")
+
+    const userId = req.params.id
+
+    resetCart(userId, res)
+})
+
+app.get('/market/cart/finish/:id', (req, res) => {
+    console.log("Alguém está querendo comprar os produtos do carrinho.")
+
+    const userId = req.params.id
+
+    finishShopping(userId, res)
 })
