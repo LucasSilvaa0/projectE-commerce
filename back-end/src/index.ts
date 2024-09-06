@@ -3,7 +3,7 @@ import { UserModel, MarketProductModel, UpdatePriceModel, CartProductModel } fro
 import { showProducts, offerProduct, delProduct, searchUser, updateProductPrice, newCartProduct, delCartProduct, resetCart, finishShopping } from './functions';
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 app.use(express.json());
 
@@ -24,6 +24,7 @@ app.post('/new_user', (req, res) => {
     console.log("Alguém está tentanto criar um novo usuário! ")
 
     const newUserScheme = req.body
+    console.log(newUserScheme)
 
     const result = UserModel.safeParse(newUserScheme);
     if (result.success) {
