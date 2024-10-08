@@ -1,0 +1,45 @@
+import { useState } from "react";
+import axios from "axios";
+
+export default function EsqueceuSenha() {
+    const [email, setEmail] = useState('')
+
+    async function handleSubmit(e) {
+        e.preventDefault();
+        
+        try {
+    
+          const usuario = {
+              email,
+          }
+    
+          const response = await axios.post('http://localhost:5000/user/forgot_password', usuario)
+          console.log(response.status)
+            
+        } catch (e) {
+          window.alert("ERRO!")
+          console.log(e)
+        }
+    };
+
+    return (
+        <div className="container">
+          <h2>Entrada de Usuário</h2>
+          <form onSubmit={handleSubmit}>
+            <label>E-mail:
+              <input
+                type="email"
+                name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </label>
+            <button type="submit" className="enviar-senha">ENVIAR SENHA PARA O EMAIL</button>
+            <div className='log-botoes'>
+              <button type='button' className='cadastrar' onClick={() => window.location.replace("http://localhost:3000/user/new_user")}>Cadastrar</button><div className='space-botoes'/><button type='submit' className='entrar'>Entrar</button>
+            </div>
+          </form>
+        </div>
+      );
+}

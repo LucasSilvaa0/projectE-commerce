@@ -25,6 +25,8 @@ form {
 
 label {
   margin-top: 15px;
+  display: flex;
+  flex-direction: column;
 }
 
 input {
@@ -34,7 +36,37 @@ input {
   border-radius: 4px;
 }
 
-button {
+div.log-botoes {
+  display: flex;
+}
+
+button.enviar-senha {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #000000;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+}
+
+button.cadastrar {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #000accbe;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 49%;
+}
+
+div.space-botoes {
+  width: 2%;
+}
+
+button.entrar {
   margin-top: 20px;
   padding: 10px;
   background-color: #0066cc;
@@ -42,6 +74,7 @@ button {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  width: 49%;
 }
 
 button:hover {
