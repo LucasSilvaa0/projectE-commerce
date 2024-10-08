@@ -38,7 +38,7 @@ app.post("/", (req, res) => {
 	res.send(corpo);
 });
 
-app.post("/new_user", (req, res) => {
+app.post("/user/new_user", (req, res) => {
 	console.log("Alguém está tentanto criar um novo usuário! ");
 
 	const newUserScheme = req.body;
@@ -52,7 +52,7 @@ app.post("/new_user", (req, res) => {
 	}
 });
 
-app.post("/forgot_password", (req, res) => {
+app.post("/user/forgot_password", (req, res) => {
 	console.log("Alguém está querendo lembrar da senha. ");
 
 	const userEmail = req.body;
@@ -60,7 +60,7 @@ app.post("/forgot_password", (req, res) => {
 	searchUser(userEmail, res, 1);
 });
 
-app.post("/login", (req, res) => {
+app.post("/user/login", (req, res) => {
 	console.log("Alguém está querendo logar a conta.");
 
 	const user = req.body;
