@@ -1,6 +1,7 @@
 import Cadastro from "./components/user/sign-up";
 import Login from "./components/user/log-in";
 import EsqueceuSenha from "./components/user/esqueceu-senha";
+import Products from "./components/market/products"
 
 export default function Folders() {
 
@@ -17,8 +18,8 @@ export default function Folders() {
         pagina = <Login/>
     } else if (`${vallink}` === "http://localhost:3000/user/forgot_password") {
         pagina = <EsqueceuSenha />
-    } else {
-        inicio()
+    } else if (`${vallink}` === "http://localhost:3000/market/products") {
+        pagina = <Products />
     }
 
     return (
