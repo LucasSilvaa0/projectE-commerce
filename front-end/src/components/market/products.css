@@ -26,6 +26,20 @@
     color: #fff;
 }
 
+.cart-button {
+    background-color: #a2ff00;
+    color: #0066cc;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.cart-button:hover {
+    background-color: #69a500;
+    color: #fff;
+}
+
 .produtos-container {
     display: flex;
     justify-content: space-around;

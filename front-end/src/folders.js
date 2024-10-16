@@ -20,6 +20,8 @@ export default function Folders() {
         pagina = <EsqueceuSenha />
     } else if (`${vallink}` === "http://localhost:3000/market/products") {
         pagina = <Products />
+    } else {
+        inicio()
     }
 
     return (

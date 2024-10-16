@@ -2,6 +2,7 @@ import React from 'react';
 import './products.css';
 import { useQuery } from '@tanstack/react-query'
 import getMarketProducts from '../http/getMarketProducts';
+import postCartProduct from '../http/postNewCartProduct';
 
 
 function Products() {
@@ -11,8 +12,6 @@ function Products() {
     staleTime: 1000 * 60,
   })
 
-  console.log(data)
-
   if (isLoading) {
     return <p>Carregando produtos...</p>;
   }
@@ -21,10 +20,10 @@ function Products() {
     return <p>Erro ao carregar produtos: {error.message}</p>;
   }
 
-  //const response = await marketProducts()
-  //console.log(response)
-  
-  //const produtos = response.data
+  const newCartProduct = async (productId) => {
+    const retorno = await postCartProduct(productId)
+    if (retorno === 200) window.alert("Produto adicionado ao carrinho com sucesso!")
+  }
 
   const handlePerfilClick = () => {
     // Aqui você pode redirecionar para a página de perfil ou abrir uma aba lateral.
@@ -54,6 +53,7 @@ function Products() {
               <h2>{produto.product_name}</h2>
               <p>{produto.product_description}</p>
               <p className="preco">{BRreal.format(produto.product_price)}</p>
+              <button type='button' className="cart-button" onClick={() => newCartProduct([1, produto.id])}>Adicionar ao carrinho</button>
             </div>
           )
         })}
