@@ -21,7 +21,7 @@ export function searchUser(userScheme: any, res: any, type: number) {
 						sendPassword(userScheme, results[0].userpassword);
 						break;
 					case 2:
-						login(userScheme, results[0].userpassword, res);
+						login(userScheme, results[0].userpassword, res, results);
 						break;
 				}
 			} else {
@@ -31,11 +31,11 @@ export function searchUser(userScheme: any, res: any, type: number) {
 						break;
 					case 1:
 						console.log("Esse email não está cadastrado.");
-						res.send("erro");
+						res.send("Esse email não está cadastrado.");
 						break;
 					case 2:
 						console.log("Esse email não está cadastrado.");
-						res.send("erro");
+						res.send("Esse email não está cadastrado.");
 						break;
 				}
 			}
@@ -95,10 +95,10 @@ async function sendPassword(userScheme: any, password: string) {
 	}
 }
 
-function login(userScheme: any, password: string, res: any) {
+function login(userScheme: any, password: string, res: any, results: any) {
 	if (userScheme.userpassword === password) {
 		console.log("A tentativa de login foi concluída com sucesso.");
-		res.send(userScheme);
+		res.send(results);
 	} else {
 		console.log("O email ou a senha estão incorretos.");
 		res.send("Login incorreto.");
