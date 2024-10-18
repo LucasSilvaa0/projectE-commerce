@@ -58,6 +58,23 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+div.blocos-colunas {
+    height: 100%;
+    width: 25%;
+}
+
+.user-produto-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    gap: 300px;
+}
+
 .produto-card h2 {
     font-size: 1.5em;
     margin-bottom: 10px;
@@ -75,4 +92,14 @@
 img {
     width: 180px;
     height: 120px;
+}
+
+.perfil-page {
+    display: flex;
+}
+
+.perfil {
+    height: 580px;
+    width: 500px;
+    background-color: rgba(169, 244, 191, 0.511);
 }
