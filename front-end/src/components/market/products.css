@@ -60,7 +60,7 @@
 
 div.blocos-colunas {
     height: 100%;
-    width: 25%;
+    width: 100%;
 }
 
 .user-produto-card {
@@ -72,21 +72,27 @@ div.blocos-colunas {
     text-align: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
-    gap: 300px;
-}
-
-.produto-card h2 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-}
-
-.produto-card p {
-    font-size: 1em;
+    gap: 10%;
+    width: 145%;
 }
 
 .preco {
     font-weight: bold;
     color: #2d87f0;
+}
+
+.botao-editar:hover {
+    background-color: silver;
+}
+
+.botao-excluir {
+    background-color: black;
+    color: yellow;
+}
+
+.botao-excluir:hover {
+    background-color: #b50000;
+    color: #fff;
 }
 
 img {
@@ -99,7 +105,20 @@ img {
 }
 
 .perfil {
-    height: 580px;
-    width: 500px;
-    background-color: rgba(169, 244, 191, 0.511);
+    height:auto;
+    width: 10%;
+    background-color: rgba(244, 169, 214, 0.511);
+    padding-top: 15px;
+}
+
+.img_perfil {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: rgba(255, 255, 255, 0.571);
+    width: 100%;
+    border-radius: 100%;
+}
+
+.user-produtos-container {
+    width: 59%;
 }
