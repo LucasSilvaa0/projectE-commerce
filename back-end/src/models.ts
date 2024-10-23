@@ -15,8 +15,9 @@ export const MarketProductModel = z.object({
 });
 
 export const UpdatePriceModel = z.object({
-	seller_id: z.number().int(),
 	product_id: z.number().int(),
+	new_name: z.string().min(1),
+	new_description: z.string().min(1),
 	new_price: z.number(),
 });
 

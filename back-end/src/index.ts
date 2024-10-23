@@ -11,7 +11,7 @@ import {
 	offerProduct,
 	delProduct,
 	searchUser,
-	updateProductPrice,
+	updateProduct,
 	newCartProduct,
 	delCartProduct,
 	resetCart,
@@ -100,8 +100,9 @@ app.put("/market/update_product", (req, res) => {
 	const result = UpdatePriceModel.safeParse(updatePriceScheme);
 
 	if (result.success) {
-		updateProductPrice(updatePriceScheme, res);
+		updateProduct(updatePriceScheme, res);
 	} else {
+		console.log(updatePriceScheme);
 		res.send("Ocorreu algum erro na estrutura do JSON.");
 	}
 });
