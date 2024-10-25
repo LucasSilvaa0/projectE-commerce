@@ -165,7 +165,7 @@ export default function UserProducts() {
             <div className="perfil">
                 <img src="../perfil.png" alt="img_perfil" className="img_perfil"/>
                 <h2 className="username">{data.user.username}</h2>
-                <button type="button" className="botao-adicionar" onClick={novoProduto}><strong>➕<br/>ADICIONAR PRODUTO NA LOJA<br/>➕</strong></button>
+                {creatingNewProduct? <button type="button" className="botao-adicionar" onClick={novoProduto}><strong>↩️<br/>VOLTAR PARA PERFIL<br/></strong>↩️</button> : <button type="button" className="botao-adicionar" onClick={novoProduto}><strong>➕<br/>ADICIONAR PRODUTO NA LOJA<br/>➕</strong></button> }
                 <button type="button" className="botao-carrinho"><strong>🛒<br/>CARRINHO<br/>🛒</strong></button>
             </div>
 
