@@ -165,3 +165,21 @@ img {
 .user-produtos-container {
     width: 59%;
 }
+
+.formulario-novo-produto {
+    width: 90%;
+    height: 500px;
+    background-color: rgba(178, 183, 159, 0.796);
+    text-align: center;
+}
+
+.botao-novo-produto {
+    width: 150px;
+    height: 80px;
+    font: normal 20px italic;
+    background-color: #5cb837bc;
+}
+
+.botao-novo-produto:hover {
+    background-color: #48ff00eb;
+}
