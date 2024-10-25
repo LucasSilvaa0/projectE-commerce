@@ -1,6 +1,7 @@
 import connection from "./db";
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
+import { QueryResult } from "mysql2";
 
 export function searchUser(userScheme: any, res: any, type: number) {
 	connection.query(
@@ -184,13 +185,22 @@ export function showProducts(res: any, type: number, id: any = 0) {
 			connection.query(
 				"SELECT * FROM marketproducts WHERE seller_id = ?",
 				[id],
-				(err, results) => {
-					if (err !== null) {
-						console.log("Ocorreu um erro.");
-						res.send("Erro ao tentar ver os próprios produtos.");
-					} else {
-						res.send(results);
-					}
+				(err1, results1) => {
+					connection.query(
+						"SELECT username FROM users WHERE id = ?",
+						[id],
+						(err2, results2: any) => {
+							if (err2 !== null) {
+								console.log("Ocorreu um erro.");
+								res.send("Erro ao tentar ver os próprios produtos.");
+							} else {
+								res.send({
+									products: results1,
+									user: results2[0],
+								});
+							}
+						},
+					);
 				},
 			);
 	}
