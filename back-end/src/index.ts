@@ -16,6 +16,7 @@ import {
 	delCartProduct,
 	resetCart,
 	finishShopping,
+	showCart,
 } from "./functions";
 
 const app = express();
@@ -121,6 +122,14 @@ app.get("/market/myproducts/:userId", (req, res) => {
 	showProducts(res, 1, userId);
 });
 
+app.get("/market/cart/:userId", (req, res) => {
+	console.log("Alguém está querendo ver os produtos do seu carrinho.");
+
+	const userId = Number(req.params.userId);
+
+	showCart(userId, res);
+});
+
 app.post("/market/cart/new_product", (req, res) => {
 	console.log("Alguém está querendo adicionar um produto ao carrinho.");
 
@@ -152,7 +161,9 @@ app.delete("/market/cart/reset/:id", (req, res) => {
 });
 
 app.get("/market/cart/finish/:id", (req, res) => {
-	console.log("Alguém está querendo comprar os produtos do carrinho.");
+	console.log(
+		"Alguém está querendo finalizar as compras dos produtos do carrinho.",
+	);
 
 	const userId = req.params.id;
 

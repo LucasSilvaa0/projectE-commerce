@@ -235,6 +235,7 @@ export function delCartProduct(productId: any, res: any) {
 				console.log("Ocorreu algum erro.");
 				res.send(err);
 			} else {
+				console.log("Produto removido com sucesso.");
 				res.send("Produto deletado do carrinho com sucesso.");
 			}
 		},
@@ -256,6 +257,20 @@ export function resetCart(userId: any, res: any) {
 	);
 }
 
+export function showCart(userId: number, res: any) {
+	connection.query(
+		"SELECT cartproducts.id, cartproducts.cart_user_id, marketproducts.product_name, marketproducts.product_price, marketproducts.photo_link, users.username AS product_seller FROM cartproducts LEFT JOIN marketproducts ON cartproducts.product_id = marketproducts.id LEFT JOIN users ON marketproducts.seller_id = users.id WHERE cartproducts.cart_user_id = ?",
+		[userId],
+		(err, results) => {
+			if (err !== null) {
+				console.log("Ocorreu algum erro.");
+				return res.send(err);
+			}
+			return res.send(results);
+		},
+	);
+}
+
 export function finishShopping(userId: any, res: any) {
 	connection.query(
 		"SELECT * FROM cartproducts WHERE cart_user_id = ?",
@@ -265,18 +280,6 @@ export function finishShopping(userId: any, res: any) {
 				console.log("Ocorreu algum erro.");
 				res.send(err1);
 			} else {
-				const listProducts = results1;
-				for (let i = 0; i < listProducts.length; i++) {
-					connection.query(
-						"DELETE FROM marketproducts WHERE id = ?",
-						[listProducts[i].product_id],
-						(err2, results2) => {
-							if (err2 !== null) {
-								res.send(err2);
-							}
-						},
-					);
-				}
 				connection.query(
 					"DELETE FROM cartproducts WHERE cart_user_id = ?",
 					[userId],
