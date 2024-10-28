@@ -79,7 +79,7 @@ div.blocos-colunas {
     font: normal 13px italic;
     margin-top: 15px;
     width: 140px;
-    height: 74px;
+    height: auto;
 }
 
 .botao-adicionar:hover {
@@ -94,7 +94,7 @@ div.blocos-colunas {
     font: normal 15px italic;
     margin-top: 15px;
     width: 140px;
-    height: 72px;
+    height: auto;
 }
 
 .botao-carrinho:hover {
@@ -182,4 +182,11 @@ img {
 
 .botao-novo-produto:hover {
     background-color: #48ff00eb;
+}
+
+.tabela-carrinho {
+    width: 90%;
+    height: auto;
+    background-color: rgba(178, 183, 159, 0.796);
+    text-align: center;
 }

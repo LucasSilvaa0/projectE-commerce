@@ -1,6 +1,6 @@
 import axios from "axios"
 
-export async function postNewProduct(produto) {
+export default async function postNewProduct(produto) {
 
     console.log(produto)
 

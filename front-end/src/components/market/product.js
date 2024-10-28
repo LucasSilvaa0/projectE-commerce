@@ -34,10 +34,10 @@ function Produto({ produto, onSave }) {
         setIsEditing(false);
     };
 
-        const BRreal = new Intl.NumberFormat('pt-BR', {
-            style: 'currency',
-            currency: 'BRL',
-        })
+    const BRreal = new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+    })
 
     return (
         <div>
