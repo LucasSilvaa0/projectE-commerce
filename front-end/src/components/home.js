@@ -9,9 +9,7 @@ function Home() {
 
   const dadosUsuario = JSON.parse(localStorage.getItem('user_token'))
   const tokenId = dadosUsuario.tokenId
-
-  console.log("OLHA AQUI: ", tokenId)
-
+  
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ['products'],
     queryFn: getMarketProducts,
