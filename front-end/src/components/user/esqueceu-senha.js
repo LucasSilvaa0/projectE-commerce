@@ -17,7 +17,8 @@ export default function EsqueceuSenha() {
           }
     
           const response = await axios.post('http://localhost:5000/user/forgot_password', usuario)
-          console.log(response.status)
+          
+          if (response.status === 200) window.alert(`Um email foi enviado para ${email}.`)
             
         } catch (e) {
           window.alert("ERRO!")
@@ -40,7 +41,7 @@ export default function EsqueceuSenha() {
             </label>
             <button type="submit" className="enviar-senha">ENVIAR SENHA PARA O EMAIL</button>
             <div className='log-botoes'>
-              <button type='button' className='cadastrar' onClick={() => navigate("/signup")}>Cadastrar</button><div className='space-botoes'/><button type='button' className='entrar'>Entrar</button>
+              <button type='button' className='cadastrar' onClick={() => navigate("/signup")}>Cadastrar</button><div className='space-botoes'/><button type='button' className='entrar' onClick={() => navigate('/')}>Entrar</button>
             </div>
           </form>
         </div>
