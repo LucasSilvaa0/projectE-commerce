@@ -1,7 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 export default function EsqueceuSenha() {
+    const navigate = useNavigate()
+
     const [email, setEmail] = useState('')
 
     async function handleSubmit(e) {
@@ -37,7 +40,7 @@ export default function EsqueceuSenha() {
             </label>
             <button type="submit" className="enviar-senha">ENVIAR SENHA PARA O EMAIL</button>
             <div className='log-botoes'>
-              <button type='button' className='cadastrar' onClick={() => window.location.replace("http://localhost:3000/user/new_user")}>Cadastrar</button><div className='space-botoes'/><button type='button' className='entrar'>Entrar</button>
+              <button type='button' className='cadastrar' onClick={() => navigate("/signup")}>Cadastrar</button><div className='space-botoes'/><button type='button' className='entrar'>Entrar</button>
             </div>
           </form>
         </div>

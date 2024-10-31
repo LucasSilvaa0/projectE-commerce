@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import Folders from './folders';
+import App from './App';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Logo from "./logo"
 
@@ -14,7 +14,7 @@ root.render(
   <QueryClientProvider client={queryClient}>
     <Logo />
 
-    <Folders />
+    <App />
   </QueryClientProvider>
 );
 

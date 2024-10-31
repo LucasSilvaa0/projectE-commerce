@@ -14,9 +14,11 @@ const uploadPreset = process.env.REACT_APP_CLOUD_UPLOAD_PRESET;
 const cloudName = process.env.REACT_APP_CLOUD_NAME;
 
 export default function UserProducts() {
-    const [tokenId, setTokenId] = useState(9)
     const [creatingNewProduct, setCreatingNewProduct] = useState(false)
     const [showingCart, setShowingCart] = useState(false)
+    
+    const dadosUsuario = JSON.parse(localStorage.getItem('user_token'))
+    const tokenId = dadosUsuario.tokenId
     
     const { data, isLoading, isError, error } = useQuery({
         queryKey: ['userProducts', tokenId],
@@ -24,12 +26,12 @@ export default function UserProducts() {
         staleTime: 1000 * 300,
     })
 
-
     const data2 = useQuery({
         queryKey: ['userCart', tokenId],
         queryFn: getUserCart,
         staleTime: 1000 * 300,
     })
+
     const produtosCarrinho = data2.data
 
     async function handleUpdateProduct(produto) {

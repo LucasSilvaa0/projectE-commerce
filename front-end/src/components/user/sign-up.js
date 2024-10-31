@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-function Cadastro() {
+export default function Signup() {
+  const navigate = useNavigate()
+
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('')
   const [userpassword, setUserpassword] = useState('')
@@ -18,7 +21,11 @@ function Cadastro() {
       }
 
       const response = await axios.post('http://localhost:5000/user/new_user', usuario)
-      console.log(response.status)
+      
+      if (response.status === 200) {
+        window.alert("Conta cadastrada com sucesso!!!")
+        navigate("/")
+      }
         
     } catch (e) {
       window.alert("ERRO!")
@@ -60,11 +67,9 @@ function Cadastro() {
           />
         </label>
         <div className='log-botoes'>
-          <button type='submit' className='cadastrar'>Cadastrar</button><div className='space-botoes'/><button type='submit' className='entrar' onClick={() => window.location.replace("http://localhost:3000/user/login")}>Entrar</button>
+          <button type='submit' className='cadastrar'>Cadastrar</button><div className='space-botoes'/><button type='submit' className='entrar' onClick={() => navigate('/')}>Entrar</button>
         </div>
       </form>
     </div>
   );
 }
-
-export default Cadastro;
