@@ -1,7 +1,6 @@
-import connection from "./db";
+import connection from "../db";
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
-import { QueryResult } from "mysql2";
 
 export function searchUser(userScheme: any, res: any, type: number) {
 	connection.query(
@@ -15,7 +14,7 @@ export function searchUser(userScheme: any, res: any, type: number) {
 				switch (type) {
 					case 0:
 						console.log("Esse email já está sendo utilizado.");
-						res.send([]);
+						res.send("Esse email já está sendo utilizado.");
 						break;
 					case 1:
 						res.send(results[0]);
@@ -291,6 +290,10 @@ export function finishShopping(userId: any, res: any) {
 
 						console.log(result);
 						for (let i = 0; i < results2.length; i++) {
+							connection.query(
+								"DELETE FROM cartproducts WHERE product_id = ?",
+								[result.products[i].id],
+							);
 							connection.query(
 								"DELETE FROM marketproducts WHERE id = ?",
 								[result.products[i].id],
