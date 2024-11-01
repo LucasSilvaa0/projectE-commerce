@@ -1,23 +1,24 @@
 import express from "express";
 
-import {
-	MarketProductModel,
-	UpdatePriceModel,
-	CartProductModel,
-} from "./models";
-import {
-	showProducts,
-	offerProduct,
-	delProduct,
-	searchUser,
-	updateProduct,
-	newCartProduct,
-	delCartProduct,
-	finishShopping,
-	showCart,
-} from "../functions/functions";
+// HTML POST
 import newUserRoute from "./routes/new_user";
 import forgotPasswordRoute from "./routes/forgot_password";
+import loginRoute from "./routes/login";
+import cartUserProductsRoute from "./routes/cart_user_products";
+import marketNewProductRoute from "./routes/market_new_product";
+
+// HTML DELETE
+import marketDelProductRoute from "./routes/market_del_product";
+import cartDelProductRoute from "./routes/cart_del_product";
+
+// HTML PUT
+import marketUpdateProductRoute from "./routes/market_update_product";
+
+// HTML GET
+import marketProductsRoute from "./routes/market_products";
+import marketUserProductsRoute from "./routes/market_user_products";
+import cartNewProductRoute from "./routes/cart_new_product";
+import cartFinishShoppingRoute from "./routes/cart_finish_shopping";
 
 export const app = express();
 const port = 5000;
@@ -31,106 +32,34 @@ app.listen(port, () => {
 	console.log(`Servidor rodando na porta ${port}`);
 });
 
+// HTML POST
 app.post("/user/new_user", (req, res) => newUserRoute(req, res));
 app.post("/user/forgot_password", (req, res) => forgotPasswordRoute(req, res));
+app.post("/user/login", (req, res) => loginRoute(req, res));
+app.post("/market/new_product", (req, res) => marketNewProductRoute(req, res));
+app.post("/market/cart/new_product", (req, res) =>
+	cartNewProductRoute(req, res),
+);
 
-app.post("/user/login", (req, res) => {
-	console.log("Alguém está querendo logar a conta.");
+// HTML DELETE
+app.delete("/market/del_product/:id", (req, res) =>
+	marketDelProductRoute(req, res),
+);
+app.delete("/market/cart/del_product/:id", (req, res) =>
+	cartDelProductRoute(req, res),
+);
 
-	const user = req.body;
+// HTML PUT
+app.put("/market/update_product", (req, res) =>
+	marketUpdateProductRoute(req, res),
+);
 
-	searchUser(user, res, 2);
-});
-
-app.post("/market/new_product", (req, res) => {
-	console.log("Tem alguém querendo oferecer um novo produto.");
-
-	const newProductScheme = req.body;
-
-	const result = MarketProductModel.safeParse(newProductScheme);
-
-	console.log(result);
-
-	if (result.success) {
-		offerProduct(newProductScheme, res);
-	} else {
-		res.send("Ocorreu algum erro na estrutura do JSON.");
-	}
-});
-
-app.delete("/market/del_product/:id", (req, res) => {
-	console.log("Alguém está querendo deletar um produto do mercado.");
-
-	const productId = req.params.id;
-
-	delProduct(productId, res);
-});
-
-app.put("/market/update_product", (req, res) => {
-	console.log("Alguém está querendo modificar o preço de um produto.");
-
-	const updatePriceScheme = req.body;
-
-	const result = UpdatePriceModel.safeParse(updatePriceScheme);
-
-	if (result.success) {
-		updateProduct(updatePriceScheme, res);
-	} else {
-		console.log(updatePriceScheme);
-		res.send("Ocorreu algum erro na estrutura do JSON.");
-	}
-});
-
-app.get("/market/products", (req, res) => {
-	console.log("Alguém está querendo dar uma olhada na loja.");
-
-	showProducts(res, 0);
-});
-
-app.get("/market/myproducts/:userId", (req, res) => {
-	console.log("Alguém está querendo ver seus próprios produtos.");
-
-	const userId = req.params.userId;
-
-	showProducts(res, 1, userId);
-});
-
-app.get("/market/cart/:userId", (req, res) => {
-	console.log("Alguém está querendo ver os produtos do seu carrinho.");
-
-	const userId = Number(req.params.userId);
-
-	showCart(userId, res);
-});
-
-app.post("/market/cart/new_product", (req, res) => {
-	console.log("Alguém está querendo adicionar um produto ao carrinho.");
-
-	const newProductScheme = req.body;
-
-	const result = CartProductModel.safeParse(newProductScheme);
-
-	if (result.success) {
-		newCartProduct(newProductScheme, res);
-	} else {
-		console.log("Ocorreu algum erro na estrutura do JSON.");
-	}
-});
-
-app.delete("/market/cart/del_product/:id", (req, res) => {
-	console.log("Alguém está querendo retirar um produto do carrinho.");
-
-	const productId = req.params.id;
-
-	delCartProduct(productId, res);
-});
-
-app.get("/market/cart/finish/:id", (req, res) => {
-	console.log(
-		"Alguém está querendo finalizar as compras dos produtos do carrinho.",
-	);
-
-	const userId = req.params.id;
-
-	finishShopping(userId, res);
-});
+// HTML GET
+app.get("/market/products", (req, res) => marketProductsRoute(req, res));
+app.get("/market/myproducts/:userId", (req, res) =>
+	marketUserProductsRoute(req, res),
+);
+app.get("/market/cart/:userId", (req, res) => cartUserProductsRoute(req, res));
+app.get("/market/cart/finish/:id", (req, res) =>
+	cartFinishShoppingRoute(req, res),
+);

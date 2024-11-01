@@ -1,5 +1,6 @@
 import mysql from "mysql2";
 import dotenv from "dotenv";
+import nodemailer from "nodemailer";
 
 dotenv.config();
 
@@ -10,7 +11,7 @@ const dbConfig = {
 	database: process.env.DBCONFIG_DATABASE,
 };
 
-const connection = mysql.createConnection(dbConfig);
+export const connection = mysql.createConnection(dbConfig);
 
 connection.connect((err) => {
 	if (err) {
@@ -19,4 +20,18 @@ connection.connect((err) => {
 	console.log("Conectado ao banco de dados.");
 });
 
-export default connection;
+export const transporter = nodemailer.createTransport({
+	service: "gmail",
+	auth: {
+		user: process.env.EMAIL_USER,
+		pass: process.env.EMAIL_PASSWORD,
+	},
+});
+
+transporter.verify((error, success) => {
+	if (error) {
+		console.error("Erro na configuração do transporte:", error);
+	} else {
+		console.log("Transporte configurado corretamente:", success);
+	}
+});

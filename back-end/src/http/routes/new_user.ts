@@ -1,4 +1,4 @@
-import { searchUser } from "../../functions/functions";
+import newUser from "../../functions/new_user";
 import { UserModel } from "../models";
 import type { Request, Response } from "express";
 
@@ -8,9 +8,10 @@ export default function newUserRoute(req: Request, res: Response) {
 	const newUserScheme = req.body;
 
 	const result = UserModel.safeParse(newUserScheme);
+
 	if (result.success) {
 		console.log("Validação bem-sucedida:", result.data);
-		searchUser(newUserScheme, res, 0);
+		newUser(newUserScheme, res);
 	} else {
 		console.log("Erro de validação:", result.error.errors);
 	}
