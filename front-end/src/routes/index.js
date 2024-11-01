@@ -18,7 +18,7 @@ export default function RoutesApp() {
             <fragment>
                 <Routes>
                     <Route exact path="/home" element={<Private Item={Home} />}/>
-                    <Route exact path="/perfil" element={<Private Item={UserProducts} />}/>
+                    <Route exact path="/profile" element={<Private Item={UserProducts} />}/>
                     <Route exact path="/forgot_password" element={<EsqueceuSenha />}/>
                     <Route exact path="/signup" element={<Signup />}/>
                     <Route path="/" element={<Signin />}/>

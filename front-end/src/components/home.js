@@ -30,7 +30,7 @@ function Home() {
   }
 
   const handlePerfilClick = () => {
-    navigate('/perfil')
+    navigate('/profile')
   };
 
   const BRreal = new Intl.NumberFormat('pt-BR', {

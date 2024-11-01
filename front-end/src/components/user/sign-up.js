@@ -22,9 +22,11 @@ export default function Signup() {
 
       const response = await axios.post('http://localhost:5000/user/new_user', usuario)
       
-      if (response.status === 200) {
+      if (response.status === 200 && response.data !== "Esse email já está sendo utilizado.") {
         window.alert("Conta cadastrada com sucesso!!!")
         navigate("/")
+      } else {
+        window.alert(response.data)
       }
         
     } catch (e) {
