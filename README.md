@@ -11,7 +11,7 @@ In this website, you can see 7 different pages:
 "/forgot_password" => Page used to recieve an email to remind you what is your password.
 ![image](https://github.com/user-attachments/assets/9f67f4fb-b9b9-4721-89a1-82cbf1598053)
 
-"/home" => Homepage used to see all products you can put in your cart to buy.
+"/home" => Homepage used to see all products you can put into your cart to buy.
 ![image](https://github.com/user-attachments/assets/86ecaeff-f2a0-45fe-932d-c3751fb2c542)
 
 "/profile" => Page to see your profile with your products, delete some product and edit some product.
