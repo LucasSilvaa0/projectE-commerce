@@ -22,3 +22,6 @@ In this website, you can see 7 different pages:
 
 "/profile" => Page to see your cart, remove some product from your cart and finish shopping.
 ![image](https://github.com/user-attachments/assets/9017a32c-7b79-463f-b7b2-38c74e540878)
+
+All the accounts created and products offered will be saved on the MySQL database. The products' photos are saved on Cloud and the photo's link is sent to database to be saved in database and be sent back for future requests.
+Furthermore, using the "forgot_password" page, you will recieve email to help you with your account. The same way, when some product offered by you is selled, you will recieve an email to tell you about the buyer, the product and the product's price.
